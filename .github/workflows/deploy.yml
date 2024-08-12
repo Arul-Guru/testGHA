@@ -2,13 +2,11 @@ name: Deploy
 
 
 on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+    outputs:
+      build_status:
+        description: 'Build status'
+        type: string
 
 
 jobs:
