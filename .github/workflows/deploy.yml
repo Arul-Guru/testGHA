@@ -7,6 +7,10 @@ on:
         description: 'The deployment environment'
         required: true
         type: string
+    outputs:
+      build-status:
+        description: 'Build status'
+        value: ${{ steps.set_output.outputs.build-status }}
 
 jobs:
   build:
@@ -56,7 +60,4 @@ jobs:
         id: set_output
         run: echo "build-status=Success" >> $GITHUB_ENV
 
-    outputs:
-      build-status:
-        description: 'Build status'
-        value: ${{ steps.set_output.outputs.build-status }}
+

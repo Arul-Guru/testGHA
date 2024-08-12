@@ -14,8 +14,6 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       environment: 'production'
-    outputs:
-      build-status: ${{ jobs.build.outputs.build-status }}
 
   check-job-status:
     needs: call-deploy
