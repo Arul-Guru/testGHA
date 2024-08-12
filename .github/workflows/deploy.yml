@@ -58,5 +58,5 @@ jobs:
 
     outputs:
       build-status:
-        description: 'Build Status'
+#        description: 'Build Status'
         value: 'Success'
