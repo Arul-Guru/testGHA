@@ -1,14 +1,12 @@
 name: Deploy
 
-
 on:
   workflow_call:
     inputs:
       environment:
-        description: 'Deployment from CI'
+        description: 'The deployment environment'
         required: true
         type: string
-
 
 jobs:
   build:
@@ -27,8 +25,7 @@ jobs:
       - name: Cache Maven dependencies
         uses: actions/cache@v3
         with:
-          path: |
-            ~/.m2/repository
+          path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
@@ -37,20 +34,19 @@ jobs:
         run: mvn clean package --file pom.xml
 
       - name: Run Tests
-        if: ${{ contains(github.event.head_commit.message,'test commit') }}
+        if: ${{ contains(github.event.head_commit.message, 'test commit') }}
         run: mvn test
 
       - name: Check results
         run: |
-          echo "event = ${{github.event_name}} "
-          echo "Repository = ${{github.repository}}"
-          echo "JOB ID = ${{github.job}}"
-          echo "Run ID : ${{github.run_id}}"
-          echo "user = ${{github.actor}}"
-
+          echo "event = ${{ github.event_name }} "
+          echo "Repository = ${{ github.repository }}"
+          echo "JOB ID = ${{ github.job }}"
+          echo "Run ID : ${{ github.run_id }}"
+          echo "user = ${{ github.actor }}"
 
       - name: Upload JAR to Github
-        if: ${{success()}}
+        if: ${{ success() }}
         uses: actions/upload-artifact@v3
         with:
           name: myapp-jar
@@ -58,5 +54,5 @@ jobs:
 
     outputs:
       build-status:
-#        description: 'Build Status'
+        description: 'Build status'
         value: 'Success'
