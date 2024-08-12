@@ -4,18 +4,17 @@ on:
   workflow_call:
     inputs:
       environment:
-        description: 'The deployment environment'
+        description: 'Deployment environment'
         required: true
         type: string
     outputs:
       build-status:
-        description: 'Build status'
+        description: 'Status of the build'
         value: ${{ steps.set_output.outputs.build-status }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -49,15 +48,11 @@ jobs:
           echo "Run ID : ${{ github.run_id }}"
           echo "user = ${{ github.actor }}"
 
-      - name: Upload JAR to Github
-        if: ${{ success() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: myapp-jar
-          path: target/*.jar
-
       - name: Set output
         id: set_output
         run: echo "build-status=Success" >> $GITHUB_ENV
 
-
+    outputs:
+      build-status:
+        description: 'Build status'
+        value: ${{ steps.set_output.outputs.build-status }}
