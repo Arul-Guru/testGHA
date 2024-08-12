@@ -50,7 +50,7 @@ jobs:
 
       - name: Set output
         id: set_output
-        run: echo "build-status=Success" >> $GITHUB_ENV
+        run: echo "::set-output name=build-status::Success"
 
     outputs:
       build-status:

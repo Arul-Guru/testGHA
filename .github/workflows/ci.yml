@@ -20,6 +20,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Deploy Status
-        run: echo "${{ needs.call-deploy.outputs.build-status }}"
-
-
+        run: echo "Build status was ${{ needs.call-deploy.outputs.build-status }}"
