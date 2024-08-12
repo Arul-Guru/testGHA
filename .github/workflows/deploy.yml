@@ -39,7 +39,7 @@ jobs:
 
       - name: Check results
         run: |
-          echo "event = ${{ github.event_name }} "
+          echo "event = ${{ github.event_name }}"
           echo "Repository = ${{ github.repository }}"
           echo "JOB ID = ${{ github.job }}"
           echo "Run ID : ${{ github.run_id }}"
@@ -52,7 +52,11 @@ jobs:
           name: myapp-jar
           path: target/*.jar
 
+      - name: Set output
+        id: set_output
+        run: echo "build-status=Success" >> $GITHUB_ENV
+
     outputs:
       build-status:
         description: 'Build status'
-        value: 'Success'
+        value: ${{ steps.set_output.outputs.build-status }}
