@@ -55,3 +55,7 @@ jobs:
           name: myapp-jar
           path: target/*.jar
 
+    outputs:
+      build-status:
+        description: 'Build status'
+        value: 'Success'
