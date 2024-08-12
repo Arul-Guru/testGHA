@@ -6,7 +6,7 @@ on:
     outputs:
       build_status:
         description: 'Build status'
-        type: string
+#        type: string
 
 
 jobs:
