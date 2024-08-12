@@ -15,4 +15,11 @@ jobs:
     with:
       environment: 'production'
 
+  check-job-status:
+    needs: call-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Deploy Status
+        run: echo "${{ needs.call-deploy.outputs.build-status }}"
+
 
